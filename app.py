@@ -6,9 +6,12 @@ from moviepy.editor import *
 
 app = Flask(__name__)
 
-@app.route("/", methods=["GET"])
+# Test route to confirm server is live
+@app.route("/", methods=["GET", "POST"])
 def home():
-    return "Flask app is running!"
+    if request.method == "POST":
+        return {"message": "POST received at / — use /create-video for video creation"}, 200
+    return "Flask app is running! ✅"
 
 @app.route('/create-video', methods=['POST'])
 def create_video():
